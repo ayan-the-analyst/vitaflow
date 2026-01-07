@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaFlow Pro - Advanced Cerebral Health Monitor</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a56db;
+            --secondary-teal: #0ea5e9;
+            --accent-purple: #7c3aed;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            top: -150px;
+            right: -100px;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            bottom: -100px;
+            left: -50px;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-teal), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .product-visual {
+            position: relative;
+            text-align: center;
+        }
+        
+        .neck-illustration {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            position: relative;
+        }
+        
+        .sensor-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-purple);
+            animation: sensorPulse 3s infinite;
+            z-index: 10;
+        }
+        
+        @keyframes sensorPulse {
+            0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(124, 58, 237, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+        }
+        
+        .spec-card {
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .spec-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        .health-metric {
+            background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .health-metric:hover {
+            background: linear-gradient(45deg, #e0f2fe, #bae6fd);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.1);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .wave-animation {
+            animation: wave 3s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stagger-animation > * {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 2px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            border-top: 5px solid var(--primary-blue);
+        }
+        
+        .floating-device {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .compliance-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#" style="color: var(--primary-blue);">
+                <i class="fas fa-brain me-2"></i>VitaFlow<span class="text-dark">Pro</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#specs">Specifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#benefits">Benefits</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#compliance">Compliance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <a href="#pricing" class="btn btn-primary ms-lg-3 mt-3 mt-lg-0 pulse-animation">Pre-order Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Monitor Your Brain Health in Real-Time</h1>
+                    <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">VitaFlow Pro is the world's first neck-worn wearable that provides continuous, non-invasive monitoring of cerebral blood flow and vascular health.</p>
+                    <div class="d-flex flex-wrap gap-3 animate__animated animate__fadeIn animate__delay-2s">
+                        <a href="#features" class="btn btn-light btn-lg">Explore Features <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="#pricing" class="btn btn-outline-light btn-lg">View Pricing</a>
+                    </div>
+                    <div class="mt-5 d-flex flex-wrap gap-4">
+                        <div class="text-center">
+                            <h3 class="fw-bold">24/7</h3>
+                            <p class="mb-0">Continuous Monitoring</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="fw-bold">99%</h3>
+                            <p class="mb-0">Accuracy</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="fw-bold">72hr</h3>
+                            <p class="mb-0">Battery Life</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Neck Monitoring Section -->
+    <section id="overview" class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center section-title">Why Monitor from the Neck?</h2>
+            <p class="text-center lead mb-5 max-w-3 mx-auto">The neck provides direct access to the blood vessels supplying your brain, offering more accurate data than wrist-based devices.</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4 class="text-center h5 fw-bold">Direct Vascular Access</h4>
+                    <p class="text-center">Monitors the carotid artery and jugular vein for precise cerebral blood flow measurements.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h4 class="text-center h5 fw-bold">Central Pressure Reading</h4>
+                    <p class="text-center">Provides central blood pressure data that correlates directly with brain perfusion.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <h4 class="text-center h5 fw-bold">Minimal Signal Interference</h4>
+                    <p class="text-center">Less affected by motion artifacts compared to wrist-based sensors during daily activities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center section-title">Advanced Health Monitoring Features</h2>
+            
+            <div class="row g-4 mt-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-primary p-3 me-3">
+                                <i class="fas fa-tint text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Cerebral Blood Flow</h4>
+                        </div>
+                        <p>Continuously monitors blood flow to your brain to detect changes in perfusion that could indicate health issues.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation" style="animation-delay: 0.2s;">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-success p-3 me-3">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Vascular Health</h4>
+                        </div>
+                        <p>Measures arterial stiffness and vascular age to assess your cardiovascular health and risk factors.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation" style="animation-delay: 0.4s;">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-warning p-3 me-3">
+                                <i class="fas fa-lungs text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Oxygen Saturation</h4>
+                        </div>
+                        <p>Tracks blood oxygen levels in the vessels supplying your brain for comprehensive wellness monitoring.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation" style="animation-delay: 0.6s;">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-info p-3 me-3">
+                                <i class="fas fa-chart-line text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Stress & Recovery</h4>
+                        </div>
+                        <p>Analyzes your autonomic nervous system activity to quantify stress levels and recovery status.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation" style="animation-delay: 0.8s;">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-purple p-3 me-3" style="background-color: var(--accent-purple);">
+                                <i class="fas fa-bed text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Sleep Quality</h4>
+                        </div>
+                        <p>Monitors cerebral hemodynamics during sleep to provide insights into sleep quality and recovery.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="health-metric wave-animation" style="animation-delay: 1s;">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-danger p-3 me-3">
+                                <i class="fas fa-bell text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Health Alerts</h4>
+                        </div>
+                        <p>Smart alerts for unusual patterns that may require medical attention or lifestyle adjustments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section id="specs" class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center section-title">Product Specifications</h2>
+            
+            <div class="row g-4 mt-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="spec-card p-4 h-100">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-microchip fa-3x text-primary mb-3"></i>
+                            <h4>Multi-Sensor Fusion</h4>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Optical Blood Flow Monitoring</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Bioimpedance Pressure Sensing</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Acoustic Vibration Detection</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Temperature Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="spec-card p-4 h-100">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                            <h4>Connectivity & Battery</h4>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-bluetooth text-info me-2"></i> Bluetooth 5.2 (30m range)</li>
+                            <li class="mb-2"><i class="fas fa-battery-full text-success me-2"></i> 72-hour battery life</li>
+                            <li class="mb-2"><i class="fas fa-bolt text-warning me-2"></i> Fast charging (1.5 hours)</li>
+                            <li><i class="fas fa-shield-alt text-primary me-2"></i> Military-grade encryption</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="spec-card p-4 h-100">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
+                            <h4>Health Metrics Tracked</h4>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-heartbeat text-danger me-2"></i> Cerebral Perfusion Index</li>
+                            <li class="mb-2"><i class="fas fa-water text-info me-2"></i> Vascular Stiffness Score</li>
+                            <li class="mb-2"><i class="fas fa-wind text-success me-2"></i> Respiratory Rate</li>
+                            <li><i class="fas fa-brain text-purple me-2"></i> Stress & Recovery Score</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits & Use Cases -->
+    <section id="benefits" class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center section-title">Who Can Benefit?</h2>
+            
+            <div class="row g-4 mt-5">
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex p-4 mb-4">
+                            <i class="fas fa-user-injured fa-3x text-primary"></i>
+                        </div>
+                        <h5>Stroke Recovery</h5>
+                        <p>Monitor cerebral blood flow during rehabilitation to track recovery progress.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center p-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex p-4 mb-4">
+                            <i class="fas fa-head-side-virus fa-3x text-success"></i>
+                        </div>
+                        <h5>Concussion Management</h5>
+                        <p>Track intracranial pressure changes after head injuries for safer recovery.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center p-4">
+                        <div class="rounded-circle bg-warning bg-opacity-10 d-inline-flex p-4 mb-4">
+                            <i class="fas fa-heart fa-3x text-warning"></i>
+                        </div>
+                        <h5>Cardiovascular Health</h5>
+                        <p>Monitor vascular stiffness and blood pressure trends for heart health management.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center p-4">
+                        <div class="rounded-circle bg-info bg-opacity-10 d-inline-flex p-4 mb-4">
+                            <i class="fas fa-brain fa-3x text-info"></i>
+                        </div>
+                        <h5>Wellness & Performance</h5>
+                        <p>Optimize stress, sleep, and recovery for peak mental and physical performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App & Data Visualization -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h3 class="fw-bold mb-4">Comprehensive Health Dashboard</h3>
+                    <p class="mb-4">The VitaFlow Pro companion app transforms complex cerebral health data into easy-to-understand insights.</p>
+                    
+                    <div class="d-flex mb-4">
+                        <div class="me-4">
+                            <h5 class="text-primary">24/7 Monitoring</h5>
+                            <p>Continuous tracking with periodic health reports</p>
+                        </div>
+                        <div>
+                            <h5 class="text-primary">Trend Analysis</h5>
+                            <p>Identify patterns and correlations in your health data</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex">
+                        <div class="me-4">
+                            <h5 class="text-primary">Doctor Sharing</h5>
+                            <p>Securely share reports with healthcare providers</p>
+                        </div>
+                        <div>
+                            <h5 class="text-primary">Personalized Insights</h5>
+                            <p>AI-powered recommendations based on your data</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-primary me-3"><i class="fab fa-apple me-2"></i> App Store</a>
+                        <a href="#" class="btn btn-primary"><i class="fab fa-google-play me-2"></i> Google Play</a>
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance & Safety -->
+    <section id="compliance" class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center section-title">Certified & Safe</h2>
+            
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="bg-white p-5 rounded-3 shadow-sm">
+                        <p class="lead text-center mb-4">VitaFlow Pro meets the highest standards for medical-grade wearable technology</p>
+                        
+                        <div class="text-center mb-5">
+                            <span class="compliance-badge">ISO 13485 Certified</span>
+                            <span class="compliance-badge" style="background-color: #3b82f6;">CDSCO Class A</span>
+                            <span class="compliance-badge" style="background-color: #10b981;">BIS Certified</span>
+                            <span class="compliance-badge" style="background-color: #f59e0b;">WPC Approved</span>
+                            <span class="compliance-badge" style="background-color: #8b5cf6;">HIPAA Compliant</span>
+                        </div>
+                        
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-4">
+                                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                                <h5>Data Privacy</h5>
+                                <p class="small">End-to-end encryption with HIPAA compliant data storage</p>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <i class="fas fa-clinic-medical fa-3x text-success mb-3"></i>
+                                <h5>Clinical Validation</h5>
+                                <p class="small">Clinically validated against gold-standard measurement techniques</p>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <i class="fas fa-user-shield fa-3x text-warning mb-3"></i>
+                                <h5>Safety First</h5>
+                                <p class="small">Non-invasive, zero-radiation monitoring with medical-grade materials</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center section-title">What Users Say</h2>
+            
+            <div class="row g-4 mt-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Dr. Rajesh Kumar</h5>
+                                <p class="text-muted small mb-0">Neurologist, Delhi</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"As a neurologist, I've been looking for a reliable way to monitor my patients' cerebral perfusion outside the clinic. VitaFlow Pro provides data that correlates well with our clinical assessments."</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Priya Sharma</h5>
+                                <p class="text-muted small mb-0">Stroke Survivor</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"After my stroke, I was anxious about another episode. VitaFlow Pro gives me peace of mind by monitoring my brain blood flow 24/7. The alerts help me manage my lifestyle better."</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Amit Patel</h5>
+                                <p class="text-muted small mb-0">Athlete & Coach</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"As a marathon runner, I use VitaFlow Pro to optimize my training and recovery. The vascular stiffness metrics help me understand my body's response to different training loads."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA & Pricing -->
+    <section id="pricing" class="cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Take Control of Your Brain Health?</h2>
+                    <p class="lead mb-5 opacity-90">Join thousands who are already monitoring their cerebral health with VitaFlow Pro</p>
+                    
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-6">
+                            <div class="bg-white text-dark rounded-3 p-5 h-100">
+                                <h4 class="fw-bold mb-3">Standard Kit</h4>
+                                <h2 class="fw-bold text-primary">₹15,999</h2>
+                                <p class="mb-4">One-time payment</p>
+                                
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> VitaFlow Pro Device</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> 3 Months of Adhesive Patches</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Charging Cable & Case</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Mobile App Access</li>
+                                    <li><i class="fas fa-check text-success me-3"></i> Basic Health Reports</li>
+                                </ul>
+                                
+                                <a href="#" class="btn btn-primary btn-lg w-100">Pre-order Now</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="bg-white text-dark rounded-3 p-5 h-100 border border-3 border-primary">
+                                <div class="position-absolute top-0 start-50 translate-middle">
+                                    <span class="badge bg-primary px-3 py-2">Most Popular</span>
+                                </div>
+                                <h4 class="fw-bold mb-3">Professional Kit</h4>
+                                <h2 class="fw-bold text-primary">₹22,999</h2>
+                                <p class="mb-4">One-time payment</p>
+                                
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Everything in Standard Kit</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> 12 Months of Adhesive Patches</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Premium Carrying Case</li>
+                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Advanced Analytics & Trends</li>
+                                    <li><i class="fas fa-check text-success me-3"></i> Doctor Report Sharing Feature</li>
+                                </ul>
+                                
+                                <a href="#" class="btn btn-primary btn-lg w-100 pulse-animation">Pre-order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-5 opacity-75">30-day money-back guarantee • Free shipping across India • 1-year warranty</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="fw-bold mb-4">
+                        <i class="fas fa-brain me-2"></i>VitaFlow<span class="text-light">Pro</span>
+                    </h4>
+                    <p>Advanced cerebral health monitoring for a healthier brain and better life.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#features" class="text-white-50 text-decoration-none">Features</a></li>
+                        <li class="mb-2"><a href="#specs" class="text-white-50 text-decoration-none">Specifications</a></li>
+                        <li class="mb-2"><a href="#pricing" class="text-white-50 text-decoration-none">Pricing</a></li>
+                        <li><a href="#compliance" class="text-white-50 text-decoration-none">Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Research</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt me-3"></i> Bangalore, India</p>
+                    <p><i class="fas fa-phone me-3"></i> +91 1800-123-4567</p>
+                    <p><i class="fas fa-envelope me-3"></i> support@vitaflowpro.com</p>
+                    
+                    <div class="mt-4">
+                        <h6>Subscribe to our newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-5">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 VitaFlow Pro. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white-50 text-decoration-none me-3">Terms of Service</a>
+                    <a href="#" class="text-white-50 text-decoration-none">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Intersection Observer for scroll animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple scroll animation for elements
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            document.querySelectorAll('.health-metric, .spec-card, .testimonial-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
