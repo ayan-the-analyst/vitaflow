@@ -3,779 +3,1508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitaFlow Pro - Advanced Cerebral Health Monitor</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- Font Awesome -->
+    <title>VitaFlow - Brain Health Monitoring Wearable</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #1a56db;
-            --secondary-teal: #0ea5e9;
-            --accent-purple: #7c3aed;
-            --light-bg: #f8fafc;
-            --dark-text: #1e293b;
+            --primary-light: #F6D6C6;
+            --primary-medium: #D49B85;
+            --primary-dark: #8C5E4F;
+            --neutral-light: #E8E8E8;
+            --neutral-medium: #B4B4B4;
+            --neutral-dark: #666666;
+            --white: #FFFFFF;
+            --black: #222222;
+            --accent: #A13D2D;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--dark-text);
+            font-family: 'Source Sans Pro', sans-serif;
+            color: var(--black);
+            background-color: var(--white);
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 5px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo i {
+            margin-right: 12px;
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            background-color: var(--accent);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: 30px;
+            margin-left: 25px;
+            transition: all 0.3s;
+        }
+        
+        .cta-nav:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(161, 61, 45, 0.3);
+        }
+        
+        .cta-nav::after {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section - UPDATED with larger product */
+        .hero {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, rgba(212, 155, 133, 0.08) 0%, rgba(246, 214, 198, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 155, 133, 0.15) 0%, rgba(212, 155, 133, 0) 70%);
+            top: -400px;
+            right: -300px;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(161, 61, 45, 0.08) 0%, rgba(161, 61, 45, 0) 70%);
+            bottom: -300px;
+            left: -200px;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+            max-width: 600px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero-text .tagline {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: var(--neutral-dark);
+            max-width: 600px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--primary-dark));
             color: white;
-            padding: 120px 0 80px;
+            padding: 18px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 8px 20px rgba(140, 94, 79, 0.25);
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(140, 94, 79, 0.35);
+        }
+        
+        .hero-visual {
+            flex: 1.2;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+        }
+        
+        .product-hover {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            animation: float 6s ease-in-out infinite;
+            z-index: 3;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .user-image-container {
+            position: absolute;
+            width: 350px;
+            height: 450px;
+            bottom: 30px;
+            right: 50px;
+            z-index: 2;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 12px solid white;
+        }
+        
+        .user-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .user-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+        
+        .element-1 {
+            width: 180px;
+            height: 180px;
+            background-color: var(--accent);
+            top: 10%;
+            left: 5%;
+            animation: pulse 4s infinite alternate;
+        }
+        
+        .element-2 {
+            width: 120px;
+            height: 120px;
+            background-color: var(--primary-medium);
+            bottom: 20%;
+            right: 10%;
+            animation: pulse 5s infinite alternate-reverse;
+        }
+        
+        .element-3 {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            top: 40%;
+            left: 15%;
+            animation: pulse 3.5s infinite alternate;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            33% {
+                transform: translateY(-20px) rotate(2deg) scale(1.02);
+            }
+            66% {
+                transform: translateY(10px) rotate(-1deg) scale(1.01);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1.15);
+                opacity: 0.3;
+            }
+        }
+        
+        /* Product Features Banner */
+        .features-banner {
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+            color: white;
+            padding: 30px 0;
+            margin-top: 20px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .features-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 10px 20px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .feature-item i {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-light);
+        }
+        
+        .feature-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+            color: var(--primary-dark);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-medium), var(--accent));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .section-title p {
+            max-width: 800px;
+            margin: 25px auto 0;
+            color: var(--neutral-dark);
+            font-size: 1.2rem;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background-color: #f9f5f3;
+        }
+        
+        .problem-content {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+        
+        .problem-text {
+            flex: 1;
+            padding: 50px;
+        }
+        
+        .problem-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+        }
+        
+        .problem-list {
+            list-style: none;
+        }
+        
+        .problem-list li {
+            margin-bottom: 18px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .problem-list li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .problem-visual {
+            flex: 1;
+            min-height: 400px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            padding: 30px;
+        }
+        
+        /* Solution Section */
+        .solution-content {
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+            background: linear-gradient(135deg, rgba(246, 214, 198, 0.2), rgba(212, 155, 133, 0.1));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+        
+        .solution-text {
+            flex: 1;
+            padding: 50px;
+        }
+        
+        .solution-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+        }
+        
+        .solution-features {
+            list-style: none;
+        }
+        
+        .solution-features li {
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .solution-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-medium);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .solution-visual {
+            flex: 1;
+            min-height: 400px;
+            background-color: var(--primary-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
         
-        .hero-section::before {
+        .solution-visual::before {
             content: '';
             position: absolute;
             width: 300px;
             height: 300px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            top: -150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            top: -100px;
             right: -100px;
         }
         
-        .hero-section::after {
+        /* Benefits Section */
+        .benefits {
+            background-color: #f9f5f3;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-top: 5px solid var(--primary-medium);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-medium));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        /* How It Works Section */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 70px;
+        }
+        
+        .steps-container::before {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            bottom: -100px;
-            left: -50px;
+            width: 80%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary-medium));
+            top: 60px;
+            left: 10%;
+            z-index: 1;
+            border-radius: 5px;
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary-teal), var(--primary-blue));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 30px;
-        }
-        
-        .product-visual {
+        .step {
+            flex: 1;
+            text-align: center;
             position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-medium), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+            font-size: 2.8rem;
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(212, 155, 133, 0.3);
+            border: 8px solid white;
+        }
+        
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .step p {
+            max-width: 250px;
+            margin: 0 auto;
+            color: var(--neutral-dark);
+        }
+        
+        /* Product Showcase */
+        .product-showcase {
+            background: linear-gradient(135deg, rgba(212, 155, 133, 0.1), rgba(161, 61, 45, 0.05));
             text-align: center;
         }
         
-        .neck-illustration {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            position: relative;
+        .product-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
         }
         
-        .sensor-point {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent-purple);
-            animation: sensorPulse 3s infinite;
-            z-index: 10;
-        }
-        
-        @keyframes sensorPulse {
-            0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(124, 58, 237, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
-        }
-        
-        .spec-card {
-            border-radius: 15px;
-            border: 1px solid #e2e8f0;
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-        }
-        
-        .spec-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-        
-        .health-metric {
-            background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
+        .product-img-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transition: all 0.3s;
         }
         
-        .health-metric:hover {
-            background: linear-gradient(45deg, #e0f2fe, #bae6fd);
+        .product-img-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
         }
         
-        .cta-section {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: rgba(14, 165, 233, 0.1);
-            top: -200px;
-            right: -200px;
-        }
-        
-        .wave-animation {
-            animation: wave 3s ease-in-out infinite;
-        }
-        
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .stagger-animation > * {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .section-title {
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
-            border-radius: 2px;
-        }
-        
-        .testimonial-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        .product-img-container img {
+            width: 100%;
             height: 100%;
-            border-top: 5px solid var(--primary-blue);
+            object-fit: cover;
         }
         
-        .floating-device {
-            animation: float 6s ease-in-out infinite;
+        /* Testimonials */
+        .testimonials {
+            background-color: #f9f5f3;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
         }
         
-        .compliance-badge {
-            display: inline-block;
-            background: #10b981;
-            color: white;
-            padding: 5px 15px;
+        .testimonial {
+            background-color: white;
             border-radius: 20px;
-            font-size: 0.9rem;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--neutral-dark);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-role {
+            color: var(--neutral-medium);
+            margin-top: 5px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            border-radius: 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .cta-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-button-secondary {
+            display: inline-block;
+            background-color: white;
+            color: var(--accent);
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .cta-button-secondary:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding-right: 20px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-light);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--neutral-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            color: var(--primary-light);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 12px;
+            color: var(--white);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-medium);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--neutral-light);
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .product-hover {
+                width: 450px;
+                height: 450px;
+            }
+            
+            .user-image-container {
+                width: 320px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            .hero-text h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-text .tagline {
+                font-size: 1.6rem;
+            }
+            
+            .product-hover {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .user-image-container {
+                width: 280px;
+                height: 350px;
+                right: 30px;
+            }
+            
+            .steps-container {
+                flex-wrap: wrap;
+            }
+            
+            .steps-container::before {
+                display: none;
+            }
+            
+            .step {
+                flex: 0 0 50%;
+                margin-bottom: 50px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 80px;
+                text-align: center;
+                max-width: 100%;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-visual {
+                min-height: 500px;
+                width: 100%;
+            }
+            
+            .product-hover {
+                width: 450px;
+                height: 450px;
+                position: relative;
+                margin-bottom: 100px;
+            }
+            
+            .user-image-container {
+                position: absolute;
+                bottom: -50px;
+                right: 50%;
+                transform: translateX(50%);
+                width: 300px;
+                height: 380px;
+            }
+            
+            .problem-content, .solution-content {
+                flex-direction: column;
+            }
+            
+            .problem-visual, .solution-visual {
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.5s ease;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 0 0 30px 0;
+            }
+            
+            .cta-nav {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.6rem;
+            }
+            
+            .hero-text .tagline {
+                font-size: 1.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .product-hover {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .step {
+                flex: 0 0 100%;
+            }
+            
+            .features-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-item {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-text .tagline {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-text, .solution-text {
+                padding: 30px;
+            }
+            
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+            
+            .product-hover {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .user-image-container {
+                width: 250px;
+                height: 320px;
+            }
+            
+            .product-img-container {
+                width: 280px;
+                height: 280px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#" style="color: var(--primary-blue);">
-                <i class="fas fa-brain me-2"></i>VitaFlow<span class="text-dark">Pro</span>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-brain"></i> Vita<span>Flow</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#specs">Specifications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#benefits">Benefits</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#compliance">Compliance</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-                <a href="#pricing" class="btn btn-primary ms-lg-3 mt-3 mt-lg-0 pulse-animation">Pre-order Now</a>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
             </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#problem">The Problem</a></li>
+                <li><a href="#solution">Our Solution</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#cta" class="cta-nav">Pre-Order Now</a></li>
+            </ul>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Monitor Your Brain Health, Anytime, Anywhere</h1>
+                <div class="tagline">Your Brain's Vital Signs, At Your Fingertips</div>
+                <p>VitaFlow is the world's first non-invasive, wearable device that continuously monitors your cerebral health. Detect early signs of stroke risk, track vascular aging, and take control of your brain wellness.</p>
+                <a href="#cta" class="cta-button">Pre-Order Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="product-hover">
+                    <img src="vita-logo.png" alt="VitaFlow Product" class="product-image">
+                </div>
+                
+                
+                
+                <div class="floating-element element-1"></div>
+                <div class="floating-element element-2"></div>
+                <div class="floating-element element-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Banner -->
+    <div class="features-banner">
+        <div class="container features-container">
+            <div class="feature-item">
+                <i class="fas fa-heartbeat"></i>
+                <span>Continuous Monitoring</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-user-md"></i>
+                <span>Clinical-Grade Accuracy</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bell"></i>
+                <span>Real-Time Alerts</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Non-Invasive & Safe</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <section class="section problem" id="problem">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Monitor Your Brain Health in Real-Time</h1>
-                    <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">VitaFlow Pro is the world's first neck-worn wearable that provides continuous, non-invasive monitoring of cerebral blood flow and vascular health.</p>
-                    <div class="d-flex flex-wrap gap-3 animate__animated animate__fadeIn animate__delay-2s">
-                        <a href="#features" class="btn btn-light btn-lg">Explore Features <i class="fas fa-arrow-right ms-2"></i></a>
-                        <a href="#pricing" class="btn btn-outline-light btn-lg">View Pricing</a>
-                    </div>
-                    <div class="mt-5 d-flex flex-wrap gap-4">
-                        <div class="text-center">
-                            <h3 class="fw-bold">24/7</h3>
-                            <p class="mb-0">Continuous Monitoring</p>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="fw-bold">99%</h3>
-                            <p class="mb-0">Accuracy</p>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="fw-bold">72hr</h3>
-                            <p class="mb-0">Battery Life</p>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="section-title">
+                <h2>The Silent Brain Health Crisis</h2>
+                <p>Millions are at risk without even knowing it. Brain health issues often show no symptoms until it's too late.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Why Neck Monitoring Section -->
-    <section id="overview" class="py-5 bg-light">
-        <div class="container py-5">
-            <h2 class="text-center section-title">Why Monitor from the Neck?</h2>
-            <p class="text-center lead mb-5 max-w-3 mx-auto">The neck provides direct access to the blood vessels supplying your brain, offering more accurate data than wrist-based devices.</p>
             
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h4 class="text-center h5 fw-bold">Direct Vascular Access</h4>
-                    <p class="text-center">Monitors the carotid artery and jugular vein for precise cerebral blood flow measurements.</p>
+            <div class="problem-content">
+                <div class="problem-text">
+                    <h3>Why Brain Monitoring Matters</h3>
+                    <ul class="problem-list">
+                        <li><strong>Stroke is a leading cause of death</strong> worldwide, with many victims under 45</li>
+                        <li><strong>Traumatic brain injuries</strong> from accidents can have delayed consequences</li>
+                        <li><strong>Vascular aging</strong> silently progresses without noticeable symptoms</li>
+                        <li>Current solutions are either <strong>invasive, expensive, or ineffective</strong></li>
+                        <li>Wrist wearables <strong>cannot accurately measure cerebral health</strong></li>
+                    </ul>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-icon">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
-                    <h4 class="text-center h5 fw-bold">Central Pressure Reading</h4>
-                    <p class="text-center">Provides central blood pressure data that correlates directly with brain perfusion.</p>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-icon">
-                        <i class="fas fa-wave-square"></i>
-                    </div>
-                    <h4 class="text-center h5 fw-bold">Minimal Signal Interference</h4>
-                    <p class="text-center">Less affected by motion artifacts compared to wrist-based sensors during daily activities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="py-5">
-        <div class="container py-5">
-            <h2 class="text-center section-title">Advanced Health Monitoring Features</h2>
-            
-            <div class="row g-4 mt-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-primary p-3 me-3">
-                                <i class="fas fa-tint text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Cerebral Blood Flow</h4>
-                        </div>
-                        <p>Continuously monitors blood flow to your brain to detect changes in perfusion that could indicate health issues.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation" style="animation-delay: 0.2s;">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-success p-3 me-3">
-                                <i class="fas fa-heart text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Vascular Health</h4>
-                        </div>
-                        <p>Measures arterial stiffness and vascular age to assess your cardiovascular health and risk factors.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation" style="animation-delay: 0.4s;">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-warning p-3 me-3">
-                                <i class="fas fa-lungs text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Oxygen Saturation</h4>
-                        </div>
-                        <p>Tracks blood oxygen levels in the vessels supplying your brain for comprehensive wellness monitoring.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation" style="animation-delay: 0.6s;">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-info p-3 me-3">
-                                <i class="fas fa-chart-line text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Stress & Recovery</h4>
-                        </div>
-                        <p>Analyzes your autonomic nervous system activity to quantify stress levels and recovery status.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation" style="animation-delay: 0.8s;">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-purple p-3 me-3" style="background-color: var(--accent-purple);">
-                                <i class="fas fa-bed text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Sleep Quality</h4>
-                        </div>
-                        <p>Monitors cerebral hemodynamics during sleep to provide insights into sleep quality and recovery.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="health-metric wave-animation" style="animation-delay: 1s;">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-danger p-3 me-3">
-                                <i class="fas fa-bell text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Health Alerts</h4>
-                        </div>
-                        <p>Smart alerts for unusual patterns that may require medical attention or lifestyle adjustments.</p>
+                <div class="problem-visual">
+                    <div style="text-align: center; max-width: 400px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; margin-bottom: 20px;"></i>
+                        <div>1 in 4 adults will have a stroke in their lifetime</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Specifications -->
-    <section id="specs" class="py-5 bg-light">
-        <div class="container py-5">
-            <h2 class="text-center section-title">Product Specifications</h2>
-            
-            <div class="row g-4 mt-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="spec-card p-4 h-100">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-microchip fa-3x text-primary mb-3"></i>
-                            <h4>Multi-Sensor Fusion</h4>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Optical Blood Flow Monitoring</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Bioimpedance Pressure Sensing</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Acoustic Vibration Detection</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i> Temperature Monitoring</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="spec-card p-4 h-100">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
-                            <h4>Connectivity & Battery</h4>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-bluetooth text-info me-2"></i> Bluetooth 5.2 (30m range)</li>
-                            <li class="mb-2"><i class="fas fa-battery-full text-success me-2"></i> 72-hour battery life</li>
-                            <li class="mb-2"><i class="fas fa-bolt text-warning me-2"></i> Fast charging (1.5 hours)</li>
-                            <li><i class="fas fa-shield-alt text-primary me-2"></i> Military-grade encryption</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="spec-card p-4 h-100">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
-                            <h4>Health Metrics Tracked</h4>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-heartbeat text-danger me-2"></i> Cerebral Perfusion Index</li>
-                            <li class="mb-2"><i class="fas fa-water text-info me-2"></i> Vascular Stiffness Score</li>
-                            <li class="mb-2"><i class="fas fa-wind text-success me-2"></i> Respiratory Rate</li>
-                            <li><i class="fas fa-brain text-purple me-2"></i> Stress & Recovery Score</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits & Use Cases -->
-    <section id="benefits" class="py-5">
-        <div class="container py-5">
-            <h2 class="text-center section-title">Who Can Benefit?</h2>
-            
-            <div class="row g-4 mt-5">
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4">
-                        <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex p-4 mb-4">
-                            <i class="fas fa-user-injured fa-3x text-primary"></i>
-                        </div>
-                        <h5>Stroke Recovery</h5>
-                        <p>Monitor cerebral blood flow during rehabilitation to track recovery progress.</p>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4">
-                        <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex p-4 mb-4">
-                            <i class="fas fa-head-side-virus fa-3x text-success"></i>
-                        </div>
-                        <h5>Concussion Management</h5>
-                        <p>Track intracranial pressure changes after head injuries for safer recovery.</p>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4">
-                        <div class="rounded-circle bg-warning bg-opacity-10 d-inline-flex p-4 mb-4">
-                            <i class="fas fa-heart fa-3x text-warning"></i>
-                        </div>
-                        <h5>Cardiovascular Health</h5>
-                        <p>Monitor vascular stiffness and blood pressure trends for heart health management.</p>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4">
-                        <div class="rounded-circle bg-info bg-opacity-10 d-inline-flex p-4 mb-4">
-                            <i class="fas fa-brain fa-3x text-info"></i>
-                        </div>
-                        <h5>Wellness & Performance</h5>
-                        <p>Optimize stress, sleep, and recovery for peak mental and physical performance.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- App & Data Visualization -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h3 class="fw-bold mb-4">Comprehensive Health Dashboard</h3>
-                    <p class="mb-4">The VitaFlow Pro companion app transforms complex cerebral health data into easy-to-understand insights.</p>
-                    
-                    <div class="d-flex mb-4">
-                        <div class="me-4">
-                            <h5 class="text-primary">24/7 Monitoring</h5>
-                            <p>Continuous tracking with periodic health reports</p>
-                        </div>
-                        <div>
-                            <h5 class="text-primary">Trend Analysis</h5>
-                            <p>Identify patterns and correlations in your health data</p>
-                        </div>
-                    </div>
-                    
-                    <div class="d-flex">
-                        <div class="me-4">
-                            <h5 class="text-primary">Doctor Sharing</h5>
-                            <p>Securely share reports with healthcare providers</p>
-                        </div>
-                        <div>
-                            <h5 class="text-primary">Personalized Insights</h5>
-                            <p>AI-powered recommendations based on your data</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-primary me-3"><i class="fab fa-apple me-2"></i> App Store</a>
-                        <a href="#" class="btn btn-primary"><i class="fab fa-google-play me-2"></i> Google Play</a>
-                    </div>
-                </div>
-                
-               
-            </div>
-        </div>
-    </section>
-
-    <!-- Compliance & Safety -->
-    <section id="compliance" class="py-5">
-        <div class="container py-5">
-            <h2 class="text-center section-title">Certified & Safe</h2>
-            
-            <div class="row mt-5">
-                <div class="col-lg-8 mx-auto">
-                    <div class="bg-white p-5 rounded-3 shadow-sm">
-                        <p class="lead text-center mb-4">VitaFlow Pro meets the highest standards for medical-grade wearable technology</p>
-                        
-                        <div class="text-center mb-5">
-                            <span class="compliance-badge">ISO 13485 Certified</span>
-                            <span class="compliance-badge" style="background-color: #3b82f6;">CDSCO Class A</span>
-                            <span class="compliance-badge" style="background-color: #10b981;">BIS Certified</span>
-                            <span class="compliance-badge" style="background-color: #f59e0b;">WPC Approved</span>
-                            <span class="compliance-badge" style="background-color: #8b5cf6;">HIPAA Compliant</span>
-                        </div>
-                        
-                        <div class="row text-center">
-                            <div class="col-md-4 mb-4">
-                                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                                <h5>Data Privacy</h5>
-                                <p class="small">End-to-end encryption with HIPAA compliant data storage</p>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <i class="fas fa-clinic-medical fa-3x text-success mb-3"></i>
-                                <h5>Clinical Validation</h5>
-                                <p class="small">Clinically validated against gold-standard measurement techniques</p>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <i class="fas fa-user-shield fa-3x text-warning mb-3"></i>
-                                <h5>Safety First</h5>
-                                <p class="small">Non-invasive, zero-radiation monitoring with medical-grade materials</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <h2 class="text-center section-title">What Users Say</h2>
-            
-            <div class="row g-4 mt-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
-                            <div>
-                                <h5 class="mb-0">Dr. Rajesh Kumar</h5>
-                                <p class="text-muted small mb-0">Neurologist, Delhi</p>
-                            </div>
-                        </div>
-                        <p class="mb-0">"As a neurologist, I've been looking for a reliable way to monitor my patients' cerebral perfusion outside the clinic. VitaFlow Pro provides data that correlates well with our clinical assessments."</p>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
-                            <div>
-                                <h5 class="mb-0">Priya Sharma</h5>
-                                <p class="text-muted small mb-0">Stroke Survivor</p>
-                            </div>
-                        </div>
-                        <p class="mb-0">"After my stroke, I was anxious about another episode. VitaFlow Pro gives me peace of mind by monitoring my brain blood flow 24/7. The alerts help me manage my lifestyle better."</p>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="User" class="rounded-circle me-3" width="60" height="60">
-                            <div>
-                                <h5 class="mb-0">Amit Patel</h5>
-                                <p class="text-muted small mb-0">Athlete & Coach</p>
-                            </div>
-                        </div>
-                        <p class="mb-0">"As a marathon runner, I use VitaFlow Pro to optimize my training and recovery. The vascular stiffness metrics help me understand my body's response to different training loads."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA & Pricing -->
-    <section id="pricing" class="cta-section">
+    <!-- Solution Section -->
+    <section class="section" id="solution">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 fw-bold mb-4">Ready to Take Control of Your Brain Health?</h2>
-                    <p class="lead mb-5 opacity-90">Join thousands who are already monitoring their cerebral health with VitaFlow Pro</p>
-                    
-                    <div class="row g-4 justify-content-center">
-                        <div class="col-md-6">
-                            <div class="bg-white text-dark rounded-3 p-5 h-100">
-                                <h4 class="fw-bold mb-3">Standard Kit</h4>
-                                <h2 class="fw-bold text-primary">₹15,999</h2>
-                                <p class="mb-4">One-time payment</p>
-                                
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> VitaFlow Pro Device</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> 3 Months of Adhesive Patches</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Charging Cable & Case</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Mobile App Access</li>
-                                    <li><i class="fas fa-check text-success me-3"></i> Basic Health Reports</li>
-                                </ul>
-                                
-                                <a href="#" class="btn btn-primary btn-lg w-100">Pre-order Now</a>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="bg-white text-dark rounded-3 p-5 h-100 border border-3 border-primary">
-                                <div class="position-absolute top-0 start-50 translate-middle">
-                                    <span class="badge bg-primary px-3 py-2">Most Popular</span>
-                                </div>
-                                <h4 class="fw-bold mb-3">Professional Kit</h4>
-                                <h2 class="fw-bold text-primary">₹22,999</h2>
-                                <p class="mb-4">One-time payment</p>
-                                
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Everything in Standard Kit</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> 12 Months of Adhesive Patches</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Premium Carrying Case</li>
-                                    <li class="mb-3"><i class="fas fa-check text-success me-3"></i> Advanced Analytics & Trends</li>
-                                    <li><i class="fas fa-check text-success me-3"></i> Doctor Report Sharing Feature</li>
-                                </ul>
-                                
-                                <a href="#" class="btn btn-primary btn-lg w-100 pulse-animation">Pre-order Now</a>
-                            </div>
-                        </div>
+            <div class="section-title">
+                <h2>Introducing VitaFlow Smart Tag</h2>
+                <p>The revolutionary wearable that brings clinical-grade brain monitoring to your everyday life.</p>
+            </div>
+            
+            <div class="solution-content">
+                <div class="solution-visual">
+                    <div style="text-align: center; z-index: 2; position: relative;">
+                        <i class="fas fa-heartbeat" style="font-size: 5rem; color: var(--primary-dark); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--primary-dark);">Continuous Monitoring</h3>
+                        <p style="color: var(--primary-dark); font-size: 1.2rem;">24/7 brain health tracking</p>
                     </div>
-                    
-                    <p class="mt-5 opacity-75">30-day money-back guarantee • Free shipping across India • 1-year warranty</p>
+                </div>
+                <div class="solution-text">
+                    <h3>Revolutionary Technology</h3>
+                    <ul class="solution-features">
+                        <li><strong>Non-invasive & comfortable</strong> - Wear it like a small patch</li>
+                        <li><strong>Multi-sensor fusion</strong> - Combines optical, electrical, and acoustic sensing</li>
+                        <li><strong>Clinical-grade accuracy</strong> - Developed with leading neurologists</li>
+                        <li><strong>Real-time alerts</strong> - Get notified of concerning changes</li>
+                        <li><strong>Easy-to-use app</strong> - Track trends and understand your brain health</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose VitaFlow?</h2>
+                <p>Experience the future of personal health monitoring with these powerful benefits</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Early Detection</h3>
+                    <p>Identify potential stroke risks and vascular issues before they become serious problems.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Clinical Accuracy</h3>
+                    <p>Hospital-grade monitoring technology in a comfortable, wearable form factor.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Home Monitoring</h3>
+                    <p>No need for frequent hospital visits. Monitor your brain health from the comfort of your home.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Track Progress</h3>
+                    <p>See how lifestyle changes affect your brain health with detailed trends and insights.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Smart Alerts</h3>
+                    <p>Get notified when readings fall outside your personalized safe zones.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Peace of Mind</h3>
+                    <p>Know that you're proactively monitoring the most important organ in your body.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How VitaFlow Works</h2>
+                <p>Simple, smart technology that puts your brain health first</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Wear the Device</h3>
+                    <p>Simply place the comfortable VitaFlow tag on your neck. It's discreet and lightweight.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Continuous Monitoring</h3>
+                    <p>VitaFlow uses multi-sensor technology to track blood flow, pressure, and vascular health.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Advanced Analysis</h3>
+                    <p>Our AI algorithms process the data to provide insights into your cerebral health.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Insights</h3>
+                    <p>View your brain health metrics, trends, and receive personalized recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="section product-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>VitaFlow in Action</h2>
+                <p>See how VitaFlow seamlessly integrates into everyday life</p>
+            </div>
+            
+            <div class="product-images">
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="VitaFlow device close-up">
+                </div>
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1467&q=80" alt="Person wearing VitaFlow">
+                </div>
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="VitaFlow mobile app">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Experts Say</h2>
+                <p>Leading medical professionals recognize the potential of VitaFlow</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "VitaFlow represents a breakthrough in non-invasive cerebral monitoring. For the first time, we can track brain health continuously outside clinical settings."
+                    </div>
+                    <div class="testimonial-author">Dr. Priya Sharma</div>
+                    <div class="testimonial-role">Neurologist, NIMHANS Bangalore</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2>Take Control of Your Brain Health Today</h2>
+            <p>Join the revolution in personal health monitoring. Pre-order your VitaFlow now and be among the first to experience clinical-grade brain health tracking.</p>
+            <a href="#" class="cta-button-secondary">Pre-Order Now <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="py-5 bg-dark text-white">
+    <footer id="contact">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h4 class="fw-bold mb-4">
-                        <i class="fas fa-brain me-2"></i>VitaFlow<span class="text-light">Pro</span>
-                    </h4>
-                    <p>Advanced cerebral health monitoring for a healthier brain and better life.</p>
-                    <div class="d-flex gap-3 mt-4">
-                        <a href="#" class="text-white"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>VitaFlow</h3>
+                    <p>Democratizing access to cerebral hemodynamic monitoring for early detection and management of stroke, TBI, and vascular aging.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5 class="mb-4">Product</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#features" class="text-white-50 text-decoration-none">Features</a></li>
-                        <li class="mb-2"><a href="#specs" class="text-white-50 text-decoration-none">Specifications</a></li>
-                        <li class="mb-2"><a href="#pricing" class="text-white-50 text-decoration-none">Pricing</a></li>
-                        <li><a href="#compliance" class="text-white-50 text-decoration-none">Compliance</a></li>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#solution">Our Solution</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
                     </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5 class="mb-4">Company</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Research</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-4">Contact Us</h5>
-                    <p><i class="fas fa-map-marker-alt me-3"></i> Bangalore, India</p>
-                    <p><i class="fas fa-phone me-3"></i> +91 1800-123-4567</p>
-                    <p><i class="fas fa-envelope me-3"></i> support@vitaflowpro.com</p>
-                    
-                    <div class="mt-4">
-                        <h6>Subscribe to our newsletter</h6>
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Your email">
-                            <button class="btn btn-primary" type="button">Subscribe</button>
-                        </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@vitaflow.com</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 1800-123-4567</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bangalore, India</span>
                     </div>
                 </div>
             </div>
             
-            <hr class="my-5">
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2026 VitaFlow Pro. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
-                    <a href="#" class="text-white-50 text-decoration-none me-3">Terms of Service</a>
-                    <a href="#" class="text-white-50 text-decoration-none">Cookie Policy</a>
-                </div>
+            <div class="copyright">
+                <p>&copy; 2023 VitaFlow. All rights reserved. | Your Brain's Vital Signs, Anytime, Anywhere.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Intersection Observer for scroll animations -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Simple scroll animation for elements
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe elements for animation
-            document.querySelectorAll('.health-metric, .spec-card, .testimonial-card').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if(targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
             });
         });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements to animate
+        document.querySelectorAll('.benefit-card, .step, .testimonial, .product-img-container').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Simple testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = [
+            {
+                text: "VitaFlow represents a breakthrough in non-invasive cerebral monitoring. For the first time, we can track brain health continuously outside clinical settings.",
+                author: "Dr. Priya Sharma",
+                role: "Neurologist, NIMHANS Bangalore"
+            },
+            {
+                text: "As someone with a family history of stroke, VitaFlow gives me peace of mind. I can monitor my vascular health daily and make lifestyle adjustments.",
+                author: "Rajesh Kumar",
+                role: "Early Adopter"
+            },
+            {
+                text: "The technology behind VitaFlow is groundbreaking. The sensor fusion approach provides data we previously could only get through invasive procedures.",
+                author: "Dr. Arjun Mehta",
+                role: "Biomedical Engineer"
+            }
+        ];
+        
+        function changeTestimonial() {
+            const testimonialElement = document.querySelector('.testimonial');
+            if (testimonialElement) {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                
+                testimonialElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    testimonialElement.innerHTML = `
+                        <div class="testimonial-text">"${testimonials[currentTestimonial].text}"</div>
+                        <div class="testimonial-author">${testimonials[currentTestimonial].author}</div>
+                        <div class="testimonial-role">${testimonials[currentTestimonial].role}</div>
+                    `;
+                    testimonialElement.style.opacity = '1';
+                }, 300);
+            }
+        }
+        
+        // Change testimonial every 5 seconds
+        setInterval(changeTestimonial, 5000);
+        
+        // Enhanced floating animation for product
+        const productHover = document.querySelector('.product-hover');
+        if (productHover) {
+            let floatDirection = 1;
+            
+            function enhancedFloat() {
+                const currentTransform = getComputedStyle(productHover).transform;
+                const matrix = new DOMMatrix(currentTransform);
+                const currentScale = matrix.a;
+                
+                if (currentScale >= 1.05) floatDirection = -1;
+                if (currentScale <= 0.98) floatDirection = 1;
+                
+                const newScale = currentScale + (0.001 * floatDirection);
+                productHover.style.transform = `translateY(${Math.sin(Date.now() / 1000) * 20}px) rotate(${Math.sin(Date.now() / 1500) * 3}deg) scale(${newScale})`;
+                
+                requestAnimationFrame(enhancedFloat);
+            }
+            
+            // Start the enhanced animation
+            requestAnimationFrame(enhancedFloat);
+        }
     </script>
 </body>
 </html>
